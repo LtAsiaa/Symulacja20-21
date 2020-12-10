@@ -1,0 +1,13 @@
+﻿  event.cpp
+  even_list.cpp
+  goods.cpp
+  headquarters.cpp
+  main.cpp
+  platform.cpp
+  process.cpp
+  regionalDepots.cpp
+  transportCompany.cpp
+  truck.cpp
+C:\Users\Asia\source\repos\Symulacja\Symulacja\truck.cpp(30,65): warning C4244: "argument": konwersja z "double" do "const int", możliwa utrata danych
+  Generowanie kodu...
+  Symulacja.vcxproj -> C:\Users\Asia\source\repos\Symulacja\Debug\Symulacja.exe
