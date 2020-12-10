@@ -14,20 +14,29 @@ public:
 	~Truck();
 
 	void execute(double);
-	int getID() const;
-	int getU() const; //getter units
+	
+	int getID();
+	void setID(const int kID_);
+	
+	int getTotalU(); //getter units
+	void setTotalU(const int totalUnits);
+
+	int getStan();
+	void setStan(int stan);
+
+	int getFreeSpace();
+	void setFreeSpace(int freeSpace);
 	
 	static const int seed_ = 123456;
 	static double ExponentialDistributionGenerator(const int average);
-	int getStan();
-	void setStan(int stan);
+	
 
 private:
 	//static int id_;
 	int stan = -1;
-	//const int kID_; //id truck
-	//const int totalUnits_; //truck load capacity
-	//int freeSpace; //free space on truck
+	int kID_; //id truck
+	const int totalUnits_ = 10; //truck load capacity
+	int freeSpace; //free space on truck
 };
 
 

@@ -15,6 +15,9 @@ public:
 	Truck* GetFromQueue();
 	void AddToQueueGoods(Goods*);
 	queue<Goods*> goods_queue;
+
+	void PlaceTruckontoPlatform();
+	
 private:
 	const int kNofPlatform = 3;
 	queue<Truck*> queue_to_platform_; //Line of waiting trucks to the platforms

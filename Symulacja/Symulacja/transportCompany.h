@@ -22,7 +22,7 @@ public:
 	Event_list* event_list_;
 
 	void truckControl();
-	void PlaceTruckontoPlatform();
+
 	
 private:
 	const int kNofTruck = 8;

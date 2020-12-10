@@ -27,5 +27,9 @@ void Headquarters::AddToQueueGoods(Goods* goods)
 	goods_queue.push(goods);
 }
 
+void Headquarters::PlaceTruckontoPlatform()
+{
+	
+}
 
-		
+

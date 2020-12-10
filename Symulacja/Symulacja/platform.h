@@ -10,6 +10,7 @@ public:
 	Goods* goods1;
 	
 	bool platformState();
+	
 	int getState();
 	void setState(bool state_platform);
 	bool state_platform;

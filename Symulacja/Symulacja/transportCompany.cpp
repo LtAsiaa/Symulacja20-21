@@ -32,7 +32,3 @@ void TransportCompany::truckControl()
 	}
 }
 
-void TransportCompany::PlaceTruckontoPlatform()
-{
-	
-}
