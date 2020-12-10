@@ -9,14 +9,15 @@ class Process
 public:
 	Process(Event_list*, int);
 	~Process();
+	double time();
 	void Info();
 	int phase_;
-	double time();
 	void activate(double);
 	void TimeUpdate(double);
 	Event_list* event_list_;
 	int id_;
-
+	bool terminated_;
+	
 private:
 	Event* my_event_;
 };

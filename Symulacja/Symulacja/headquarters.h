@@ -13,7 +13,9 @@ public:
 	~Headquarters();
 	void AddToQueueTruck(Process*);
 	Truck* GetFromQueue();
+
 	void AddToQueueGoods(Goods*);
+	
 	queue<Goods*> goods_queue;
 
 	void PlaceTruckontoPlatform();

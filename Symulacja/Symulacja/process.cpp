@@ -12,7 +12,7 @@ Process::~Process()
 
 double Process::time()
 {
-	return 0;
+	return my_event_->event_time_;
 }
 
 void Process::Info()
