@@ -1,12 +1,2 @@
-﻿  even_list.cpp
-  goods.cpp
-  headquarters.cpp
-  main.cpp
-  platform.cpp
-  process.cpp
-  regionalDepots.cpp
-  transportCompany.cpp
-  truck.cpp
-C:\Users\Asia\Documents\GitHub\Symulacja20-21\Symulacja\Symulacja\truck.cpp(29,65): warning C4244: "argument": konwersja z "double" do "const int", możliwa utrata danych
-  Generowanie kodu...
-  Symulacja.vcxproj -> C:\Users\Asia\Documents\GitHub\Symulacja20-21\Symulacja\Debug\Symulacja.exe
+﻿  process.cpp
+  Symulacja.vcxproj -> C:\Users\Asia\Desktop\Symulacja_3\Symulacja\Debug\Symulacja.exe

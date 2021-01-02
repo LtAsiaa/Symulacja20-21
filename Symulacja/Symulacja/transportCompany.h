@@ -1,32 +1,35 @@
 #ifndef MODEL_TransportCompany_H_
 #define MODEL_TransportCompany_H_
 
-#include "truck.h"
-#include "goods.h"
-#include "headquarters.h"
-#include "regionalDepots.h"
+//#include "truck.h"
 #include <queue>
-#include <vector>
+#include <random>
+#include "platform.h"
+#include "regionalDepots.h"
+#include "logger.h"
+
 
 class TransportCompany
 {
 public:
 	TransportCompany();
 	~TransportCompany();
-	
-	vector <Truck*> truck_;
 
-	Goods* goods_;
-	Headquarters* headquarters_;
-	RegionalDepots* regionaldepots_;
-	Event_list* event_list_;
+	//Headquarters* headquarters_;
+	Platform* platform_;
+	RegionalDepots* regionaldepots1_;
+	RegionalDepots* regionaldepots2_;
+	RegionalDepots* regionaldepots3_;
+	RegionalDepots* regionaldepots4_;
+	RegionalDepots* regionaldepots5_;
+	RegionalDepots* regionaldepots6_;
 
-	void truckControl();
-
-	
+	void WakeUp(double);
+	int GetIDGoods();
+	void IncIDGoods();
 private:
-	const int kNofTruck = 8;
-	const int kNofDepot = 6;
+	int id_goods_ = 0;	
+	//std::vector<TruckRegionalD*> //vector on regional depots
 	
 };
 

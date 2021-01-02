@@ -4,31 +4,33 @@
 
 TransportCompany::TransportCompany()
 {
-	for (int i = 0; i < kNofTruck; i++)
-	{
-		Truck* temp = new Truck(event_list_, i);
-		truck_.push_back(temp);
-	}
-	headquarters_ = new Headquarters();
+	platform_ = new Platform;
+	regionaldepots1_ = new RegionalDepots();
+	regionaldepots2_ = new RegionalDepots();
+	regionaldepots3_ = new RegionalDepots();
+	regionaldepots4_ = new RegionalDepots();
+	regionaldepots5_ = new RegionalDepots();
+	regionaldepots6_ = new RegionalDepots();
 }
 
 TransportCompany::~TransportCompany()
 {
-
+	delete platform_;
+	platform_ = nullptr;
 }
 
-void TransportCompany::truckControl()
+void TransportCompany::WakeUp(double)
 {
-	for(int i=0; i<kNofTruck; i++)
-	{
-		if (truck_[i]->getStan()==-1)
-		{
-			continue;
-		}
-		if (truck_[i]->getStan() == 0)
-		{
-			headquarters_->AddToQueueTruck(truck_[i]);
-		}
-	}
+
 }
 
+int TransportCompany::GetIDGoods()
+{
+	//generuj id od 1 do 6 
+	return  rand() % 6 + 1;
+}
+
+void TransportCompany::IncIDGoods()
+{
+	id_goods_++;
+}
