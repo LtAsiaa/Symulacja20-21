@@ -22,7 +22,7 @@ void Goods::execute(const double new_time)
 		{
 		case 0:
 		{
-			//cerr << "Nowa paczka HQ";
+			//Logger::GetInstance()->Print(("\nNowa paczka HQ"), Logger::L3);
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 0, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(2.2));
@@ -33,6 +33,7 @@ void Goods::execute(const double new_time)
 		}break;
 		case 1:
 		{
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
 			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 1, id_p_);
 			this->tim = time();
@@ -44,7 +45,8 @@ void Goods::execute(const double new_time)
 		}break;
 		case 2:
 		{
-			//cerr << "Nowa paczka RD---------------->" << phase_;
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
+			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 2, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(12.3));
@@ -55,7 +57,8 @@ void Goods::execute(const double new_time)
 		}break;
 		case 3:
 		{
-			//cerr << "Nowa paczka RD---------------->" << phase_;
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
+			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 3, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(12.3));
@@ -66,7 +69,8 @@ void Goods::execute(const double new_time)
 		}break;
 		case 4:
 		{
-			//cerr << "Nowa paczka RD---------------->" << phase_;
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
+			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 4, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(12.3));
@@ -77,7 +81,8 @@ void Goods::execute(const double new_time)
 		}break;
 		case 5:
 		{
-			//cerr << "Nowa paczka RD---------------->" << phase_;
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
+			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 5, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(12.3));
@@ -88,7 +93,8 @@ void Goods::execute(const double new_time)
 		}break;
 		case 6:
 		{
-			//cerr << "Nowa paczka RD---------------->" << phase_;
+			//Logger::GetInstance()->Print(("\nNowa paczka RD1:" + to_string(phase_)), Logger::L3);
+			//cerr << "Nowa paczka RD---------------->"<< phase_;
 			Process* process = new Goods(event_list_, transportcompany_, id_, Generators::NormalDistributionGenerator(make_pair(2.0, 0.36)), 6, id_p_);
 			this->tim = time();
 			process->activate(time() + Generators::ExponentialDistributionGenerator(12.3));

@@ -21,7 +21,7 @@ void Event_list::AddNewEvent(Event* add_event)
         last_->next_ = add_event;
         last_ = add_event;
     }
-    else {
+    else { //od³o¿enie na póŸniej
         Event* search = first_;
         while (search->event_time_ <= add_event->event_time_)
         {
@@ -44,10 +44,10 @@ double Event_list::FirstEventTime()
 
 void Event_list::TestingFunction() const
 {
-    cout << "Event_list: Testing function:\n";
+    Logger::GetInstance()->Print(("\nEvent_list: Testing function:\n "), Logger::L4);
     if (first_ == nullptr || first_ == last_)
     {
-        cout << "Nothing to test :(\n";
+        Logger::GetInstance()->Print(("\nNothing to test:\n "), Logger::L4);
     }
     else
     {
@@ -70,7 +70,7 @@ Event* Event_list::RemoveFirst()
         first_event_from_list->prev_ = nullptr;
         return first_event_from_list;
     }
-    cerr << "ERROR Event_list: There is no event to remove!\n";
+    Logger::GetInstance()->Print(("\nERROR Event_list: There is no event to remove!\n "), Logger::L4);
     cin.get();
     return nullptr;
 }

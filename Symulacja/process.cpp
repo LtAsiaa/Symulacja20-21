@@ -10,7 +10,7 @@ Process::Process(Event_list* listt, int id, double size, int phase, int id_p) : 
 
 Process::~Process()
 {
-	cout << "Process destruktor\n";
+	Logger::GetInstance()->Print(("\nProcess destruktor"), Logger::L3);
 	delete my_event_;
 }
 
@@ -21,7 +21,8 @@ double Process::time()
 
 void Process::Info()
 {
-	cout << "\nID: " << id_ << "  FAZA: " << phase_<<"   CZAS: " << time() << "IDP: " << id_p_ << endl;
+	Logger::GetInstance()->Print(("\nID: " + to_string(id_) + " FAZA: " + to_string(phase_) + "  CZAS:  " + to_string(time())+ "IDP: " + to_string(id_p_) + "\n"), Logger::L4);
+	//cout << "\nID: " << id_ << "  FAZA: " << phase_<<"   CZAS: " << time() << "IDP: " << id_p_ << endl;
 }
 
 void Process::activate(const double time)

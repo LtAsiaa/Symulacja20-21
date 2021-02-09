@@ -2,6 +2,7 @@
 #include "Event_list.h"
 #include <iostream>
 #include <list>
+#include "logger.h"
 
 class Process
 {

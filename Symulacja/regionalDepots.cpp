@@ -1,13 +1,12 @@
 #include <iostream>
 #include "regionalDepots.h"
 #include "truck.h"
-#include "headquarters.h"
 #include <fstream>
 #include <string>
 
 RegionalDepots::RegionalDepots()
 {
-	cerr << "\nMake Regional Depot";
+	Logger::GetInstance()->Print(("\nMake RD:"), Logger::L3);
 	regional_depot_[0] = 0;
 	
 }
@@ -64,7 +63,8 @@ void RegionalDepots::AddTruckToRegionalDepot()
 		queue_.pop();
 		return;
 	}
-	cerr << "ERROR RegionalDepots.cpp: There is no free RD desk!\n";
+	Logger::GetInstance()->Print(("\nERROR RegionalDepots.cpp: There is no free RD desk!"), Logger::L3);
+	//cerr << "ERROR RegionalDepots.cpp: There is no free RD desk!\n";
 	cin.get();
 }
 
@@ -75,7 +75,8 @@ void RegionalDepots::RemoveTruckFromRegionalDepot(Process* truck)
 		regional_depot_[0] = 0;
 		return;
 	}
-	cerr << "ERROR RegionalDepots.cpp: There is no truck to remove!\n";
+	Logger::GetInstance()->Print(("\nERROR RegionalDepots.cpp: There is no truck to remove!"), Logger::L3);
+	//cerr << "ERROR RegionalDepots.cpp: There is no truck to remove!\n";
 	cin.get();
 }
 
@@ -89,11 +90,12 @@ void RegionalDepots::WakeUpQueueForHQ(const bool regional_depot, const double ne
 
 void RegionalDepots::RegionalInfo()
 {
-	cerr << "\nRegional info";
-	cerr << "\nKolejka do RD(wielkosc): " << queue_.size() << endl;
+	Logger::GetInstance()->Print(("\n--------------Regional info-------------------"), Logger::L4);
+	Logger::GetInstance()->Print(("\nKolejka do RD (wielkosc): " + to_string(queue_.size())), Logger::L4);
 	int regional_size = 0;
 	if (regional_depot_[0] != 0) regional_size++;
-	cerr << "Zajêtosc RD(1-Tak, 0-Nie): " << regional_size << endl;
+	Logger::GetInstance()->Print(("\nZajêtosc RD (1-Tak, 0-Nie): " + to_string(regional_size)), Logger::L4);
+	//Logger::GetInstance()->Print(("\n------------------------------------------------"), Logger::L4);
 }
 
 void RegionalDepots::ClearTruck(Process* truck)
@@ -112,7 +114,7 @@ void RegionalDepots::ClearTruck(Process* truck)
 	//truck->idx_ = 0;
 	truck->pack_list_.clear();
 	truck->size_ = 10;
-	cerr << "    Pack DELETE";
+	Logger::GetInstance()->Print(("\nPack DELETE"), Logger::L3);
 }
 
 bool RegionalDepots::AddPackToTrackRD(Process* truck)
@@ -163,12 +165,12 @@ void RegionalDepots::AverageQueuePack()
 
 void RegionalDepots::PrintAverageQueue()
 {
-	cerr << "\n Avarage pack queue size: " << average_queue_ / average_counter_;
+	Logger::GetInstance()->Print(("\n Avarage pack queue size: " + to_string( average_queue_ / average_counter_)), Logger::L2);
 }
 
 void RegionalDepots::PrintAverageTimePack()
 {
-	cerr << "\n Avarage time pack in queue: " << time_pack_ / cunter_pack_;
+	Logger::GetInstance()->Print(("\n Avarage time pack in queue: " + to_string(time_pack_ / cunter_pack_)), Logger::L2);
 }
 
 void RegionalDepots::ClearStatisticRD()

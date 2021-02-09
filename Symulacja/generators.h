@@ -7,7 +7,7 @@ using namespace std;
 class Generators
 {
 public:
-	static const int kSeed = 123456;
+	static const int kSeed = 1000000;
 	static double NormalDistributionGenerator(const pair<const double, const double>);
 	static double ExponentialDistributionGenerator(double);
 	static int Distribution();

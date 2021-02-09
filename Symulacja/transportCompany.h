@@ -6,6 +6,7 @@
 #include <random>
 #include "platform.h"
 #include "regionalDepots.h"
+#include "logger.h"
 
 class TransportCompany
 {
@@ -28,7 +29,7 @@ public:
 	void WriteToExcel(double, double, string);
 	void ClearExcel();
 
-	void PrintStatistic(double);
+	void PrintStatistic(double, double);
 	void ClearStatistic();
 
 	double avarage_time_truck_ = 0;

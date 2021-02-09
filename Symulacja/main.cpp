@@ -12,7 +12,7 @@ using namespace std;
 
 
 int main()
-{
+{   
 	//double time_truck = 0;
 	//double truck = 0;
 	
@@ -23,17 +23,21 @@ int main()
 	int step_mode = 1;
 	do
 	{
-		cerr << "Wpisz dobra liczbe(1 - krokowy, 0 - ciagly)";
+		cerr << "Choose simulation mode (1 - step by step, 0 - continous): ";
 		cin >> step_mode;
 	} while (step_mode > 1 || step_mode < 0);
 	int logger_verb;
 	do
 	{
-		printf("Poziom wyœwietlaia danych (1-4): ");
+		cerr << "Choose logger verbosity level (1-4): ";
 		std::cin >> logger_verb;
 	} while (logger_verb < 1 || logger_verb > 4);
 	Logger::GetInstance()->SetLogVerbosity(static_cast<Logger::LogVerbosity>(logger_verb));
 
+
+	printf("------------------------------------------------------------------------\n");
+	printf("                           SIMULATION\n");
+	printf("------------------------------------------------------------------------\n");
 
 	TransportCompany* transportcompany = new TransportCompany;
 	transportcompany->ClearExcel();
@@ -59,12 +63,14 @@ int main()
 	double prev_clock = -1;
 	int terminated_counter = 0;
 	bool block = true;
+	double f_p = 0;
 	while(clock < 5000)
 	{
 		//Faza pocz¹tkowa zerowanie
 		/*
 		if (clock > 1000 and block == true)
 		{
+			f_p = clock;
 			transportcompany->ClearStatistic();
 			block = false;
 		}
@@ -79,17 +85,33 @@ int main()
 
 		if (prev_clock > clock)
 		{
-			cerr << "ERROR! TIME TRAVEL!\n";
+			Logger::GetInstance()->Print(("\nERROR! TIME TRAVEL!\n "), Logger::L4);
 			cin.get();
 		}			
 		prev_clock = clock;
 
 		if (step_mode)
 		{
-			cerr << "Press ENTER to continue...";
+			Logger::GetInstance()->Print(("\n Press ENTER to continue..."), Logger::L1);
 			cin.get();
 		}
 	}
-	transportcompany->PrintStatistic(clock);
+	transportcompany->PrintStatistic(clock, f_p); 
+	/*
+	ofstream f;
+	double tim;
+	for (int i = 0; i < 10000; i++)
+	{
+		//tim = Generators::Distribution();
+		tim = Generators::ExponentialDistributionGenerator(50);
+
+		//f.open("excel/Distribution.csv", ios::app);
+		f.open("excel/ExponentialDistributionGenerator.csv", ios::app);
+		f << std::to_string(tim) << endl;
+		f.close();
+	}*/
+	printf("------------------------------------------------------------------------\n");
+	printf("                           FINISHED\n");
+	printf("------------------------------------------------------------------------\n");
 	system("Pause");
 }

@@ -34,13 +34,13 @@ void TransportCompany::AvarageTimePack(double time)
 void TransportCompany::PrintTimeAvaragePercentage(double clock)
 {
 	//double avarage_time = avarage_time_truck;
-	cerr << "\n Avarage percentage truck time use: " << (((avarage_time_truck_) / clock)/8) * 100 << "\n";
+	Logger::GetInstance()->Print(("\n Avarage percentage truck time use: " +to_string ((((avarage_time_truck_) / clock)/8) * 100 )+ "\n"), Logger::L2);
 }
 
 void TransportCompany::PrintTimeAvarage()
 {
 	//double avarage_time = avarage_time_truck;
-	cerr << "\n Avarage truck time use: " << (avarage_time_truck_) / avarage_licznik_ << "\n";
+	Logger::GetInstance()->Print(("\n Avarage truck time use: " + to_string((avarage_time_truck_) / avarage_licznik_ ) + "\n"), Logger::L2);
 }
 
 void TransportCompany::WriteToExcel(double time_all, double time_truck, string excel_name)
@@ -58,34 +58,34 @@ void TransportCompany::ClearExcel()
 	f.close();
 }
 
-void TransportCompany::PrintStatistic(double clock)
+void TransportCompany::PrintStatistic(double clock, double f_time)
 {
-	cerr << "\n **************************Statistic*********************************************";
-	PrintTimeAvaragePercentage(clock - 1000);
+	Logger::GetInstance()->Print(("\n **************************Statistic*********************************************"), Logger::L2);
+	PrintTimeAvaragePercentage(clock - f_time);
 	PrintTimeAvarage();
-	cerr << "\n *****************************HQ*************************************************";
+	Logger::GetInstance()->Print(("\n *****************************HQ*************************************************"), Logger::L2);
 	platform_->PrintAverageQueue();
 	platform_->PrintAverageTimePack();
-	cerr << "\n *****************************RD*************************************************";
-	cerr << "\n RD1";
+	Logger::GetInstance()->Print(("\n *****************************RD*************************************************"), Logger::L2);
+	Logger::GetInstance()->Print(("\n RD1"), Logger::L2);
 	regionaldepots1_->PrintAverageQueue();
 	regionaldepots1_->PrintAverageTimePack();
-	cerr << "\n RD2";
+	Logger::GetInstance()->Print(("\n RD2"), Logger::L2);
 	regionaldepots2_->PrintAverageQueue();
 	regionaldepots2_->PrintAverageTimePack();
-	cerr << "\n RD3";
+	Logger::GetInstance()->Print(("\n RD3"), Logger::L2);
 	regionaldepots3_->PrintAverageQueue();
 	regionaldepots3_->PrintAverageTimePack();
-	cerr << "\n RD4";
+	Logger::GetInstance()->Print(("\n RD4"), Logger::L2);
 	regionaldepots4_->PrintAverageQueue();
 	regionaldepots4_->PrintAverageTimePack();
-	cerr << "\n RD5";
+	Logger::GetInstance()->Print(("\n RD5"), Logger::L2);
 	regionaldepots5_->PrintAverageQueue();
 	regionaldepots5_->PrintAverageTimePack();
-	cerr << "\n RD6";
+	Logger::GetInstance()->Print(("\n RD6"), Logger::L2);
 	regionaldepots6_->PrintAverageQueue();
 	regionaldepots6_->PrintAverageTimePack();
-	cerr << "\n";
+	Logger::GetInstance()->Print(("\n"), Logger::L2);
 }
 
 void TransportCompany::ClearStatistic()

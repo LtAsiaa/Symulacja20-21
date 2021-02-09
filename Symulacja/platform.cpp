@@ -23,37 +23,38 @@ void Platform::AddTruckToPlatform()
 		}
 
 	}
-	cerr << "ERROR Platform: There is no free platform!\n";
+	Logger::GetInstance()->Print(("\nERROR Platform: There is no free platform!"), Logger::L4);
 	cin.get();
 }
 
 
 void Platform::RemoveTruckFromHQ(Process* truck)
 {
-	cerr << "\ntest:" << truck->id_;
+	//cerr << "\ntest:" << truck->id_;
 	for (int i = 0; i < platform_number; i++)
 	{
 		if (platform_[i] == truck->id_)
 		{
 			platform_[i] = 0;
-			cerr << "\n+-------------";
+			//cerr << "\n+-------------";
 			return;
 		}
 	}
-	cerr << "ERROR Platform: There is no truck to remove!\n";
+	Logger::GetInstance()->Print(("\nERROR Platform: There is no truck to remove!"), Logger::L4);
 	cin.get();
 }
 
 void Platform::PlatformInfo()
 {
-	cerr << "\nPlatform info";
-	cerr << "\nKolejka do platformy(wielkosc): " << queue_.size() << endl;
+	Logger::GetInstance()->Print(("\n--------------Platform info----------------"), Logger::L4);
+	Logger::GetInstance()->Print(("\nKolejka do platformy(wielkosc):" + to_string(queue_.size())), Logger::L4);
 	int platform_size = 0;
 	for (int i = 0; i < platform_number; i++)
 	{
 		if (platform_[i] != 0) platform_size++;
 	}
-	cerr << "Zajete stanowiska platform: " << platform_size << endl;
+	Logger::GetInstance()->Print(("\nZajete stanowiska platform: " + to_string(platform_size)), Logger::L4);
+	Logger::GetInstance()->Print(("\n---------------------------------------------------"), Logger::L4);
 }
 
 bool Platform::EnoughFreeSeats()
@@ -100,12 +101,12 @@ void Platform::AverageQueuePack()
 
 void Platform::PrintAverageQueue()
 {
-	cerr << "\n Avarage pack queue size: " << average_queue_ / average_counter_;
+	Logger::GetInstance()->Print(("\n Avarage pack queue size: " + to_string(average_queue_ / average_counter_)), Logger::L2);
 }
 
 void Platform::PrintAverageTimePack()
 {
-	cerr << "\n Avarage time pack in queue: " << time_pack_ / cunter_pack_;
+	Logger::GetInstance()->Print(("\n  Avarage time pack in queue: " + to_string(time_pack_ / cunter_pack_)), Logger::L2);
 }
 
 void Platform::ClearStatisticHQ()
@@ -163,7 +164,8 @@ bool Platform::AddPackToTrack(Process* truck)
 	{		
 		if (truck->idx_ == 0)
 		{		
-			truck->idx_ = queue_pack_.front()->id_;
+			truck->idx_ = Generators::Distribution();// S2 (Destination depot is selected randomly according to uniform distribution, with equal probability of each depot.  )
+			//truck->idx_ = queue_pack_.front()->id_;
 		}		
 		for (int i = 0; i < queue_pack_.size(); i++)
 		{
@@ -227,7 +229,7 @@ void Platform::ClearTruckHQ(Process* truck)
 	truck->idx_ = 0;
 	truck->pack_list_.clear();
 	truck->size_ = 10;
-	cerr << "    Pack DELETE";
+	Logger::GetInstance()->Print(("\nPack DELETE\n"), Logger::L4);
 }
 
 int Platform::ReturnPackinTrack(Process* truck)
@@ -237,7 +239,7 @@ int Platform::ReturnPackinTrack(Process* truck)
 
 Platform::Platform()
 {
-	cerr << "Make platform\n";
+	Logger::GetInstance()->Print(("\nMake platform\n"), Logger::L4);
 	for (int i = 0; i < platform_number; i++)
 	{
 		platform_[i] = 0;
@@ -246,7 +248,7 @@ Platform::Platform()
 
 Platform::~Platform()
 {
-	cerr << "Delete Platform\n";
+	Logger::GetInstance()->Print(("\nDelete Platform\n"), Logger::L4);
 }
 
 bool Platform::Free()

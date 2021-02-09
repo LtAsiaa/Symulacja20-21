@@ -18,7 +18,7 @@ Truck::~Truck()
 
 void Truck::execute(const double new_time)
 {
-	cerr << "\n ********************************************************************************************************";
+	Logger::GetInstance()->Print(("\n ********************************************************************************************************"), Logger::L2);
 	TimeUpdate(new_time);
 	Info();
 	auto active = true;
@@ -28,8 +28,7 @@ void Truck::execute(const double new_time)
 		{
 		case 0:
 		{
-
-			cerr << "\n--> Faza 1: Dodanie samochodu do kolejki HQ";
+			Logger::GetInstance()->Print(("\nFaza 1: Dodanie samochodu do kolejki HQ"), Logger::L2);
 			transportcompany_->platform_->AddToQueue(this);
 			if (transportcompany_->platform_->Free() == false)
 			{
@@ -39,7 +38,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 1:
 		{
-			cerr << "\n--> Faza 2: Poczatek obslugi w Platform";
+			Logger::GetInstance()->Print(("\nFaza 2: Poczatek obslugi w Platform"), Logger::L2);
 			transportcompany_->platform_->AddTruckToPlatform(); // dodaje samochód do platformy					
 			if (transportcompany_->platform_->ReturnPackinTrack(this) == 0)
 			{
@@ -53,7 +52,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 2:
 		{
-			cerr << "\n--> Faza 3: Koniec obslugi w platform";
+			Logger::GetInstance()->Print(("\nFaza 3: Koniec obslugi w platform"), Logger::L2);
 			transportcompany_->platform_->RemoveTruckFromHQ(this);
 			//transportcompany_->platform_->RemovePendingProcess(this);
 			transportcompany_->platform_->WakeUpQueueForPlatform(transportcompany_->platform_->Free(), time()); // wybudza zdarzenie jeœli jest wolne miejsce								
@@ -62,7 +61,7 @@ void Truck::execute(const double new_time)
 		break;
 		case 3:
 		{
-			cerr << "\n--> Faza 4: Przejazd ciezarowki";
+			Logger::GetInstance()->Print(("\n Faza 4: Przejazd ciezarowki"), Logger::L2);
 			double timee = Generators::NormalDistributionGenerator(make_pair(20.0, 1.6 * 1.6)); // czas przejazdu do RD ut = 20, ni^2= 1,6^2 
 			transportcompany_->AvarageTimePack(timee);
 			transportcompany_->WriteToExcel(time() + timee, transportcompany_->avarage_time_truck_, "excel/AvarageTimeTrack.csv");
@@ -72,7 +71,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 4:
 		{
-			cerr << "\n--> Faza 5: Ustawienie sie w kolejce do regional depot";
+			Logger::GetInstance()->Print(("\n Faza 5: Ustawienie sie w kolejce do RD"), Logger::L2);
 			if (idx_ == 1)
 			{
 				transportcompany_->regionaldepots1_->AddToQueueRegional(this); // dodanie do kolejki regional depot			
@@ -125,7 +124,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 5:
 		{
-			cerr << "\n--> Faza 6: Rozpoczecie obslugi przy regional Depot\n";
+			Logger::GetInstance()->Print(("\nFaza 6: Rozpoczecie obslugi przy RD"), Logger::L2);
 			double timee = 0;
 			for (size_t i = 0; i < this->pack_list_.size(); i++)
 			{
@@ -163,7 +162,7 @@ void Truck::execute(const double new_time)
 				transportcompany_->regionaldepots6_->AddTruckToRegionalDepot(); // dodanie do regional depot trucka
 				transportcompany_->regionaldepots6_->ClearTruck(this); // rozladunek
 			}
-			cerr << "\n--> Faza 2.2: Rozladunek\n";
+			Logger::GetInstance()->Print(("\n --> Faza 2.2: Rozladunek"), Logger::L2);
 			this->tim = time() + timee;
 			activate(time() + timee);  // czas roz³adunku
 			phase_ = 9;
@@ -171,7 +170,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 6:
 		{
-			cerr << "\n--> Faza 7: Koniec obslugi w depot";
+			Logger::GetInstance()->Print(("\n --> Faza 7: Koniec obslugi w RD"), Logger::L2);
 			/*
 			ofstream f;
 			f.open("excel/RD_RemoveFromPlatform.csv", ios::app);
@@ -220,7 +219,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 7:
 		{
-			cerr << "\n--> Faza 8: Powrot ciezarowki do HQ";
+			Logger::GetInstance()->Print(("\n --> Faza 8: Powrot ciezarowki do HQ"), Logger::L2);
 			double timee = Generators::NormalDistributionGenerator(make_pair(20.0, 1.6 * 1.6)); // czas przejazdu do RD ut = 20, ni^2= 1,6^2 
 			transportcompany_->AvarageTimePack(timee);
 			transportcompany_->WriteToExcel(time() + timee, transportcompany_->avarage_time_truck_, "excel/AvarageTimeTrack.csv");
@@ -230,7 +229,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 8:
 		{
-			cerr << "\n--> Faza 2.1: Zaladunek";
+			Logger::GetInstance()->Print(("\n --> Faza 2.1: Zaladunek"), Logger::L2);
 			//cerr << "\nHQpack -------->" << transportcompany_->platform_->QueueSizePack(); //sprawdzanie ile paczek jest w kolejce
 			
 			if(transportcompany_->platform_->AddPackToTrack(this))
@@ -256,7 +255,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 9:
 		{
-			cerr << "\n--> Faza 6.1: Zaladunek";
+			Logger::GetInstance()->Print(("\n --> Faza 6.1: Zaladunek"), Logger::L2);
 			double timee = 0;
 			if (idx_ == 1)
 			{
@@ -376,7 +375,7 @@ void Truck::execute(const double new_time)
 		}break;
 		case 10:
 		{
-			cerr << "\n--> Faza 6.2: Rozladunek";		
+			Logger::GetInstance()->Print(("\n --> Faza 6.2: Rozladunek"), Logger::L2);
 			//transportcompany_->platform_->AddToQueuePendingProces(this);
 			double timee = 0;
 			for (size_t i = 0; i < this->pack_list_.size(); i++)
